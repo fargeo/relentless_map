@@ -15,6 +15,16 @@ async function init() {
     };
     style.layers.push(...custom.layers);
     map.setStyle(style);
+
+    map.addControl(new mapboxgl.NavigationControl());
+
+    map.addControl(new mapboxgl.GeolocateControl({
+        positionOptions: {
+            enableHighAccuracy: true
+        },
+        trackUserLocation: true,
+        showUserHeading: true
+    }));
 }
 
 mapboxgl.accessToken = settings.accessToken;
