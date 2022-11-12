@@ -1,4 +1,4 @@
-# New Map
+# Relentless Map
 
 ## Getting Started
 Install the following dependencies:
