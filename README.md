@@ -11,8 +11,6 @@ You'll also need a Git client & text editor; if you don't have those, then you s
 
 You'll also want to [sign-up for Mapbox services here](https://www.mapbox.com/signup/) and, if you haven't already, [create a GitHub account](https://github.com).
 
-Now you can use this template repository to start building your own web map.
-
 After cloning the repo, you'll need to insert your Mapbox public access token ([which can be found here](https://www.mapbox.com/account/)) into [`src/settings.json`](https://github.com/robgaston/new_map/blob/35407d2f5ddb9079f8903230264dac31ef15ad19/src/settings.json#L3).
 
 You'll also need to install your package dependencies locally by running the following from the root directory of your cloned repository:
