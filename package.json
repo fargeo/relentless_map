@@ -10,6 +10,8 @@
         "process": "cd src && node --experimental-modules --experimental-json-modules process.mjs"
     },
     "dependencies": {
+        "@mapbox/mapbox-gl-geocoder": "^5.0.1",
+        "flatpickr": "^4.6.13",
         "mapbox-gl": "^2.6.0"
     }
 }

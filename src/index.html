@@ -6,6 +6,25 @@
     </head>
     <body>
         <main>
+            <div id="filter-form">
+                <div id="filter-form-header">
+                    <strong>Filter Routes</strong>
+                    <a href="javascript:void(0)" class="expand-filters">
+                        <span id="expand-text">expand</span>
+                        <span id="collapse-text">collapse</span>
+                    </a>
+                </div>
+                <div id="filter-form-content">
+                    <div>
+                        <div>Date Range</div>
+                        <input type="text" class="flatpickr flatpickr-input" id="rangeDate" placeholder="Please select date range to filter routes" data-input>
+                    </div>
+                    <div>
+                        <div>Vehicle ID</div>
+                        <input type="text" id="vehicleID" placeholder="Please enter a vehicle ID to filter routes" data-input>
+                    </div>
+                </div>
+            </div>
             <div id="map"></div>
         </main>
     </body>

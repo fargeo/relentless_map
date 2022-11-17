@@ -15,3 +15,59 @@ main {
 #map {
     height: 100%;
 }
+
+#filter-form {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 2px;
+    width: 400px;
+    overflow: hidden;
+}
+
+#filter-form-header {
+    padding: 10px;
+}
+
+.expand-filters {
+    float: right;
+}
+
+#filter-form-content {
+    height: 0px;
+}
+
+#filter-form-content > div {
+    padding: 15px 35px 15px 15px;
+}
+
+#filter-form.expanded  #filter-form-content{
+    height: 100%;
+}
+
+#collapse-text {
+    display: none;
+}
+
+#filter-form.expanded  #collapse-text {
+    display: block;
+}
+
+#filter-form.expanded  #expand-text {
+    display: none;
+}
+
+#filter-form input[type="text"], #filter-form input[type="date"], #filter-form input[type="datetime-local"], #filter-form input[type="time"] {
+    margin-top: 5px;
+    border: 1px solid #c3c3c3;
+    height: 36px;
+    line-height: 36px;
+    width: 100%;
+    padding: 8px;
+    max-width: 360px;
+    border-radius: 3px;
+    background: #fff;
+}
