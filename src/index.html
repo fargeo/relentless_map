@@ -16,13 +16,20 @@
                     </a>
                 </div>
                 <div id="filter-form-content">
-                    <div>
-                        <div>Date Range</div>
-                        <input type="text" class="flatpickr flatpickr-input" id="rangeDate" placeholder="Please select date range to filter routes" data-input>
+                    <div class="select-wrapper">
+                        <div>Driver</div>
+                        <select id="driver-select" name="driver">
+                        </select>
+                    </div>
+                    <div class="select-wrapper">
+                        <div>Vehicle</div>
+                        <select id="vehicle-select" name="vehicle">
+                        </select>
                     </div>
                     <div>
-                        <div>Vehicle ID</div>
-                        <input type="text" id="vehicleID" placeholder="Please enter a vehicle ID to filter routes" data-input>
+                        <div>Date Range</div>
+                        <input type="text" class="flatpickr flatpickr-input" id="rangeDate"
+                            placeholder="Please select date range to filter routes" data-input>
                     </div>
                 </div>
             </div>

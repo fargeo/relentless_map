@@ -1,13 +1,18 @@
 import "./styles.css";
 import "mapbox-gl/dist/mapbox-gl.css";
 import * as mapboxgl from "mapbox-gl";
+import $ from "jquery";
+import select2 from 'select2';
+import 'select2/dist/css/select2.css'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import flatpickr from "flatpickr";
 import 'flatpickr/dist/flatpickr.min.css';
 import settings from "./settings.json";
 import custom from "./custom-style.json";
-
+import drivers from "./drivers.json";
+import vehicles from "./vehicles.json";
+select2($);
 let map;
 
 async function init() {
@@ -45,23 +50,25 @@ async function init() {
     });
 
     const updateFilters = () => {
-        let filter = null;
+        let filter = [
+            "all"
+        ];
         const dates = datefilter.selectedDates;
-        const vehicleID = vehicleFilter.value;
-        if (vehicleID) {
-            filter = ['==', ['get', 'vehicleid'], vehicleID]
-        }
+        const driver = driverSelect.val();
+        const vehicle = vehicleSelect.val();
         if (dates.length === 2) {
-            const dateFilter = [
-                "all",
+            filter = filter.concat([
                 [">=", ['get', 'trip_date'], dates[0].toISOString()],
                 ["<=", ['get', 'trip_date'], dates[1].toISOString()]
-            ];
-            if (filter) {
-                dateFilter.push(filter);
-            }
-            filter = dateFilter;
+            ]);
         }
+        if (driver !== "All Drivers") {
+            filter.push(['==', ['get', 'drivername'], driver])
+        }
+        if (vehicle !== "All Vehicles") {
+            filter.push(['==', ['get', 'vehiclename'], vehicle])
+        }
+        if (filter.length === 1) filter = null;
         map.setFilter('vehicle_paths', filter);
     };
 
@@ -107,10 +114,21 @@ async function init() {
         onChange: updateFilters
     });
 
-    const vehicleFilter = document.querySelector('#vehicleID');
-    vehicleFilter.addEventListener('keyup', updateFilters);
+    vehicleSelect.on('change', updateFilters);
+    driverSelect.on('change', updateFilters);
 }
 
 mapboxgl.accessToken = settings.accessToken;
 map = new mapboxgl.Map(settings);
 map.on("load", init);
+
+drivers.unshift('All Drivers');
+const driverSelect = $('#driver-select').select2({
+    width: "100%",
+    data: drivers
+});
+vehicles.unshift('All Vehicles');
+const vehicleSelect = $('#vehicle-select').select2({
+    width: "100%",
+    data: vehicles
+});

@@ -38,10 +38,15 @@ main {
 
 #filter-form-content {
     height: 0px;
+    padding-bottom: 5px;
 }
 
 #filter-form-content > div {
-    padding: 15px 35px 15px 15px;
+    padding: 8px 30px 8px 15px;
+}
+
+#filter-form-content > div.select-wrapper {
+    padding: 8px 15px;
 }
 
 #filter-form.expanded  #filter-form-content{
@@ -63,13 +68,18 @@ main {
 #filter-form input[type="text"], #filter-form input[type="date"], #filter-form input[type="datetime-local"], #filter-form input[type="time"] {
     margin-top: 5px;
     border: 1px solid #c3c3c3;
-    height: 36px;
+    height: 22px;
     line-height: 36px;
     width: 100%;
-    padding: 8px;
+    padding: 5px;
     max-width: 360px;
     border-radius: 3px;
     background: #fff;
+}
+
+
+.select2.select2-container {
+    margin-top: 5px;
 }
 
 @media (max-width: 1200px) {
