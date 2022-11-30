@@ -79,18 +79,18 @@ async function init() {
                         </tr>
                         <tr>
                             <th>Driver ID</th>
-                            <td>${e.features[0].properties.driverid}</td>
+                            <td>${e.features[0].properties.driverid || "driver not found"}</td>
                         </tr>
                         <tr>
                             <th>Driver Name</th>
-                            <td>${e.features[0].properties.drivername}</td>
+                            <td>${e.features[0].properties.drivername || "driver not found"}</td>
                         </tr>
                         <tr>
                             <th>Trip Date</th>
-                            <td>${e.features[0].properties.trip_date}</td>
+                            <td>${new Date(e.features[0].properties.trip_date).toLocaleDateString()}</td>
                         </tr>
                         <tr>
-                            <th>Trip Age</th>
+                            <th>Trip Age (days)</th>
                             <td>${e.features[0].properties.trip_age}</td>
                         </tr>
                         <tr>
