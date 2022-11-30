@@ -68,7 +68,36 @@ async function init() {
     map.on('click', 'vehicle_paths', (e) => {
         new mapboxgl.Popup()
             .setLngLat(e.lngLat)
-            .setHTML(e.features[0].properties.vehicleid)
+            .setHTML(`<table>
+                        <tr>
+                            <th>Vehicle ID</th>
+                            <td>${e.features[0].properties.vehicleid}</td>
+                        </tr>
+                        <tr>
+                            <th>Vehicle Name</th>
+                            <td>${e.features[0].properties.vehiclename}</td>
+                        </tr>
+                        <tr>
+                            <th>Driver ID</th>
+                            <td>${e.features[0].properties.driverid}</td>
+                        </tr>
+                        <tr>
+                            <th>Driver Name</th>
+                            <td>${e.features[0].properties.drivername}</td>
+                        </tr>
+                        <tr>
+                            <th>Trip Date</th>
+                            <td>${e.features[0].properties.trip_date}</td>
+                        </tr>
+                        <tr>
+                            <th>Trip Age</th>
+                            <td>${e.features[0].properties.trip_age}</td>
+                        </tr>
+                        <tr>
+                            <th>Shift</th>
+                            <td>${e.features[0].properties.shift}</td>
+                        </tr>
+                    </table>`)
             .addTo(map);
     });
 
