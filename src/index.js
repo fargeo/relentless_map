@@ -54,18 +54,18 @@ async function init() {
         if (dates.length === 2) {
             const dateFilter = [
                 "all",
-                [">=", ['get', 'trip_day'], dates[0].toISOString()],
-                ["<=", ['get', 'trip_day'], dates[1].toISOString()]
+                [">=", ['get', 'trip_date'], dates[0].toISOString()],
+                ["<=", ['get', 'trip_date'], dates[1].toISOString()]
             ];
             if (filter) {
                 dateFilter.push(filter);
             }
             filter = dateFilter;
         }
-        map.setFilter('original', filter);
+        map.setFilter('vehicle_paths', filter);
     };
 
-    map.on('click', 'original', (e) => {
+    map.on('click', 'vehicle_paths', (e) => {
         new mapboxgl.Popup()
             .setLngLat(e.lngLat)
             .setHTML(e.features[0].properties.vehicleid)
