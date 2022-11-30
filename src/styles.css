@@ -71,3 +71,13 @@ main {
     border-radius: 3px;
     background: #fff;
 }
+
+@media (max-width: 1200px) {
+    #filter-form {
+        bottom: 40px;
+        left: 10px;
+        right: 10px;
+        top: auto;
+        width: auto;
+    }
+}
