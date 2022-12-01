@@ -63,7 +63,10 @@ async function init() {
                 ["<=", ['get', 'trip_date'], dates[1].toISOString()]
             ]);
         }
-        if (driver !== "All Drivers") filter.push(['==', ['get', 'drivername'], driver]);
+        if (driver !== "All Drivers") {
+            if (driver === "Driver Not Found") filter.push(['!', ['to-boolean', ['get', 'drivername']]]);
+            else filter.push(['==', ['get', 'drivername'], driver]);
+        }
         if (vehicle !== "All Vehicles") filter.push(['==', ['get', 'vehiclename'], vehicle]);
         if (shift !== "all") filter.push(['==', ['get', 'shift'], shift]);
         if (filter.length === 1) filter = null;
@@ -81,7 +84,7 @@ async function init() {
                 </tr>
                 <tr>
                     <th>Driver Name</th>
-                    <td>${e.features[0].properties.drivername || "driver not found"}</td>
+                    <td>${e.features[0].properties.drivername || "Driver Not Found"}</td>
                 </tr>
                 <tr>
                     <th>Trip Date</th>
@@ -122,6 +125,7 @@ mapboxgl.accessToken = settings.accessToken;
 map = new mapboxgl.Map(settings);
 map.on("load", init);
 
+drivers.unshift('Driver Not Found');
 drivers.unshift('All Drivers');
 const driverSelect = $('#driver-select').select2({
     width: "100%",
