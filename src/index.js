@@ -100,7 +100,7 @@ async function init() {
 
     const datefilter = flatpickr('#rangeDate', {
         mode: 'range',
-        dateFormat: "Y-m-d",
+        dateFormat: "m/d/Y",
         onChange: updateFilters
     });
 
