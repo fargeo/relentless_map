@@ -70,7 +70,8 @@ async function init() {
         map.setFilter('vehicle_paths', filter);
     };
 
-    map.on('click', 'vehicle_paths', (e) => {
+    const pathLayers = ['vehicle_paths']
+    map.on('click', pathLayers, (e) => {
         new mapboxgl.Popup()
             .setLngLat(e.lngLat)
             .setHTML(`<table>
@@ -96,6 +97,14 @@ async function init() {
                 </tr>
             </table>`)
             .addTo(map);
+    });
+
+    map.on('mousemove', pathLayers, () => {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+
+    map.on('mouseleave', pathLayers, () => {
+        map.getCanvas().style.cursor = '';
     });
 
     const datefilter = flatpickr('#rangeDate', {
