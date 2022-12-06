@@ -3,7 +3,7 @@
         "@turf/turf": "^5.1.6",
         "parcel": "^2.3.2"
     },
-    "source": ["src/index.html", "src/manager/index.html"],
+    "source": ["src/index.html", "src/manager.html"],
     "scripts": {
         "build": "parcel build --dist-dir docs --public-url ./ --no-cache",
         "start": "parcel",
