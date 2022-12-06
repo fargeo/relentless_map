@@ -102,13 +102,9 @@ async function init() {
             .addTo(map);
     });
 
-    map.on('mousemove', pathLayers, () => {
-        map.getCanvas().style.cursor = 'pointer';
-    });
+    map.on('mousemove', pathLayers, () => { map.getCanvas().style.cursor = 'pointer'; });
 
-    map.on('mouseleave', pathLayers, () => {
-        map.getCanvas().style.cursor = '';
-    });
+    map.on('mouseleave', pathLayers, () => { map.getCanvas().style.cursor = ''; });
 
     const datefilter = flatpickr('#rangeDate', {
         mode: 'range',
