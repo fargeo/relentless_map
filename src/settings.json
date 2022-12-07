@@ -1,5 +1,15 @@
 {
     "container": "map",
     "accessToken": "pk.eyJ1Ijoiam9obmF0YXduIiwiYSI6ImNrNDd0a3BneDB2eGkzZHNlZ3hsdzFoYzgifQ.jsDCLtpxKHII7U_yHGWDug",
-    "style": "mapbox://styles/johnatawn/clb3uhita000q15oofpq08fsk"
+    "style": "mapbox://styles/johnatawn/clb3uhita000q15oofpq08fsk",
+    "bounds": [
+        [
+            -81.44280913103417,
+            41.2975762653179
+        ],
+        [
+            -81.93210377722451,
+            41.595715088178565
+        ]
+    ]
 }
