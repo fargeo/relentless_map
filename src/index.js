@@ -36,13 +36,38 @@ async function init() {
 
     map.addControl(new mapboxgl.NavigationControl());
 
-    map.addControl(new mapboxgl.GeolocateControl({
+    const geolocationControl = new mapboxgl.GeolocateControl({
         positionOptions: {
             enableHighAccuracy: true
         },
         trackUserLocation: true,
         showUserHeading: true
-    }));
+    });
+    map.addControl(geolocationControl);
+
+    const routes = [[]];
+    const updateGeolocationRoute = () => {
+        const routeData = {
+            "type": "FeatureCollection",
+            "features": routes[0].length > 1 ? [{
+                "id": 0,
+                "type": "Feature",
+                "geometry": {
+                    "coordinates": routes,
+                    "type": "MultiLineString"
+                },
+                "properties": {}
+            }] : []
+        };
+        map.getSource('geolocationroute').setData(routeData);
+    };
+    geolocationControl.on('trackuserlocationend', function (e) {
+        routes.push([]);
+    });
+    geolocationControl.on('geolocate', function (e) {
+        routes[routes.length-1].push([e.coords.longitude, e.coords.latitude]);
+        updateGeolocationRoute();
+    });
 
     document.querySelector('.expand-filters').addEventListener('click', () => {
         const form = document.querySelector('#filter-form');

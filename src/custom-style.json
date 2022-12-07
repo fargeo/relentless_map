@@ -1,4 +1,20 @@
 {
-    "sources": {},
-    "layers": []
+    "sources": {
+        "geolocationroute": {
+            "type": "geojson",
+            "data": {
+                "type": "FeatureCollection",
+                "features": []
+            }
+        }
+    },
+    "layers": [{
+        "id": "geolocationrouteline",
+        "type": "line",
+        "source": "geolocationroute",
+        "paint": {
+            "line-color": "rgb(0, 153, 236)",
+            "line-width": 3
+        }
+    }]
 }
