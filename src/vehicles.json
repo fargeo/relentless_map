@@ -1,8 +1,4 @@
 [
-    "C100 (COL) Toyota Camry",
-    "C101 (CLE) 2012 Corolla",
-    "C103 2015 Honda Civic",
-    "C104 (CLE) 2009 Chevy cobalt",
     "C78 (CIN) NISSAN VERSA",
     "C79 (AKR) Nissan Versa",
     "C80 (COL) Nissan Versa",
@@ -10,5 +6,9 @@
     "C85 (COL) NISSAN VERSA",
     "C89 (DAY) Nissan Versa",
     "C94 (CLE) 2013 KIA SOUL",
-    "C97 (CLE) 2016 Kia Soul"
+    "C97 (CLE) 2016 Kia Soul",
+    "C100 (COL) Toyota Camry",
+    "C101 (CLE) 2012 Corolla",
+    "C103 2015 Honda Civic",
+    "C104 (CLE) 2009 Chevy cobalt"
 ]
