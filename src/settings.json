@@ -1,7 +1,7 @@
 {
     "container": "map",
-    "accessToken": "pk.eyJ1Ijoiam9obmF0YXduIiwiYSI6ImNrNDd0a3BneDB2eGkzZHNlZ3hsdzFoYzgifQ.jsDCLtpxKHII7U_yHGWDug",
-    "style": "mapbox://styles/johnatawn/clbh7vzy9000n15tan38hnl3n?fresh=true",
+    "accessToken": "pk.eyJ1IjoiZmFyZ2VvLXJlbGVudGxlc3MiLCJhIjoiY2xibGk3bHR1MDdxcTN2cXhiejVqazJ3YSJ9.eHcRolEMxC9H9Gy9dvJ2Ew",
+    "style": "mapbox://styles/fargeo-relentless/clblkpjta001u14mn47e2c98f?fresh=true",
     "bounds": [
         [
             -81.44280913103417,
