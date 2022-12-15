@@ -82,6 +82,7 @@ async function init() {
         const driver = driverSelect.val();
         const vehicle = vehicleSelect.val();
         const shift = $('input[name="shift"]:checked').val();
+        const age = $('input[name="age"]:checked').val();
         if (dates.length === 2) {
             filter = filter.concat([
                 [">=", ['get', 'trip_date'], dates[0].toISOString()],
@@ -94,6 +95,15 @@ async function init() {
         }
         if (vehicle !== "All Vehicles") filter.push(['==', ['get', 'vehiclename'], vehicle]);
         if (shift !== "all") filter.push(['==', ['get', 'shift'], shift]);
+        if (age !== "any") {
+            const to = new Date();
+            const from = new Date();
+            from.setDate(from.getDate() - parseInt(age));
+            filter = filter.concat([
+                [">=", ['get', 'trip_date'], from.toISOString()],
+                ["<=", ['get', 'trip_date'], to.toISOString()]
+            ]);
+        }
         if (filter.length === 1) filter = null;
         map.setFilter('vehicle_paths', filter);
     };
@@ -140,6 +150,9 @@ async function init() {
     vehicleSelect.on('change', updateFilters);
     driverSelect.on('change', updateFilters);
     $('input[name="shift"]').on('change', updateFilters);
+    $('input[name="age"]').on('change', updateFilters);
+
+    updateFilters();
 }
 
 mapboxgl.accessToken = settings.accessToken;

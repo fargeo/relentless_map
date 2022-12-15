@@ -28,10 +28,26 @@
                             </select>
                         </div>
                     </div>
-                    <div>
+                    <div style="display: none;">
                         <div>Date Range</div>
                         <input type="text" class="flatpickr flatpickr-input" id="rangeDate"
                             placeholder="Please select date range to filter routes" data-input>
+                    </div>
+                    <div>
+                        <div>Route age (days)</div>
+                        <div>
+                            <input type="radio" id="age-31" name="age" value="31" checked/>
+                            <label for="age-31">31</label>
+
+                            <input type="radio" id="age-21" name="age" value="21"/>
+                            <label for="age-21">21</label>
+
+                            <input type="radio" id="age-14" name="age" value="14"/>
+                            <label for="age-14">14</label>
+
+                            <input type="radio" id="age-7" name="age" value="7"/>
+                            <label for="age-7">7</label>
+                        </div>
                     </div>
                     <div>
                         <div>Shift</div>
@@ -39,7 +55,7 @@
                             <input type="radio" id="shift-all" name="shift" value="all" checked/>
                             <label for="shift-all">All</label>
 
-                            <input type="radio" id="shift-day" name="shift" value="Day" />
+                            <input type="radio" id="shift-day" name="shift" value="Day"/>
                             <label for="shift-day">Day</label>
 
                             <input type="radio" id="shift-night" name="shift" value="Night" />
