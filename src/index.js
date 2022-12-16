@@ -74,6 +74,30 @@ async function init() {
         form.classList.toggle('expanded');
     });
 
+    const checkTime = () => {
+        let currentHour = new Date().getHours()
+        if (currentHour >= 6 && currentHour <= 18) {
+            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'visible');
+            map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
+        } else {
+            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'none');
+            map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'visible');
+        }
+    }
+    checkTime();
+
+    // const checkTime = () => {
+    //     let currentHour = new Date().getHours()
+    //     if (currentHour >= 6 && currentHour <= 18) {
+    //         map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'visible');
+    //         map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
+    //     } else {
+    //         map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'none');
+    //         map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'visible');
+    //     }
+    // }
+    // checkTime();
+
     const updateFilters = () => {
         let filter = [
             "all"
