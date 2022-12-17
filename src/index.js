@@ -79,24 +79,27 @@ async function init() {
         if (currentHour >= 6 && currentHour <= 18) {
             map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'visible');
             map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
+            tractDaysSelect.prop('checked', true);
         } else {
             map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'none');
             map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'visible');
+            tractNightSelect.prop('checked', true);
         }
     }
-    checkTime();
-
-    // const checkTime = () => {
-    //     let currentHour = new Date().getHours()
-    //     if (currentHour >= 6 && currentHour <= 18) {
-    //         map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'visible');
-    //         map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
-    //     } else {
-    //         map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'none');
-    //         map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'visible');
-    //     }
-    // }
-    // checkTime();
+    
+    const toggleReferenceLayers = () => {
+       if(tractDaysSelect.is(':checked')) {
+            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'visible');
+        } else if (tractDaysSelect.is(':checked') === false) {
+            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'none');
+        }
+       
+       if (tractNightSelect.is(':checked')) {
+            map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'visible');
+        } else if (tractNightSelect.is(':checked') === false) {
+             map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
+        }
+    }
 
     const updateFilters = () => {
         let filter = [
@@ -175,7 +178,10 @@ async function init() {
     driverSelect.on('change', updateFilters);
     $('input[name="shift"]').on('change', updateFilters);
     $('input[name="age"]').on('change', updateFilters);
+    tractDaysSelect.on('change', toggleReferenceLayers);
+    tractNightSelect.on('change', toggleReferenceLayers);
 
+    checkTime();
     updateFilters();
 }
 
@@ -194,3 +200,5 @@ const vehicleSelect = $('#vehicle-select').select2({
     width: "100%",
     data: vehicles
 });
+const tractDaysSelect = $('#tracts-day');
+const tractNightSelect = $('#tracts-night');
