@@ -74,32 +74,32 @@ async function init() {
         form.classList.toggle('expanded');
     });
 
-    const checkTime = () => {
-        let currentHour = new Date().getHours()
-        if (currentHour >= 6 && currentHour <= 18) {
-            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'visible');
-            map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
-            tractDaysSelect.prop('checked', true);
-        } else {
-            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'none');
-            map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'visible');
-            tractNightSelect.prop('checked', true);
-        }
-    }
+    // const checkTime = () => {
+    //     let currentHour = new Date().getHours()
+    //     if (currentHour >= 6 && currentHour <= 18) {
+    //         map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'visible');
+    //         map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
+    //         tractDaysSelect.prop('checked', true);
+    //     } else {
+    //         map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'none');
+    //         map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'visible');
+    //         tractNightSelect.prop('checked', true);
+    //     }
+    // }
     
-    const toggleReferenceLayers = () => {
-       if(tractDaysSelect.is(':checked')) {
-            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'visible');
-        } else if (tractDaysSelect.is(':checked') === false) {
-            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'none');
-        }
+    // const toggleReferenceLayers = () => {
+    //    if(tractDaysSelect.is(':checked')) {
+    //         map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'visible');
+    //     } else if (tractDaysSelect.is(':checked') === false) {
+    //         map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'none');
+    //     }
        
-       if (tractNightSelect.is(':checked')) {
-            map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'visible');
-        } else if (tractNightSelect.is(':checked') === false) {
-             map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
-        }
-    }
+    //    if (tractNightSelect.is(':checked')) {
+    //         map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'visible');
+    //     } else if (tractNightSelect.is(':checked') === false) {
+    //          map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
+    //     }
+    // }
 
     const updateFilters = () => {
         let filter = [
