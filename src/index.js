@@ -74,32 +74,32 @@ async function init() {
         form.classList.toggle('expanded');
     });
 
-    // const checkTime = () => {
-    //     let currentHour = new Date().getHours()
-    //     if (currentHour >= 6 && currentHour <= 18) {
-    //         map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'visible');
-    //         map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
-    //         tractDaysSelect.prop('checked', true);
-    //     } else {
-    //         map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'none');
-    //         map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'visible');
-    //         tractNightSelect.prop('checked', true);
-    //     }
-    // }
-    
-    // const toggleReferenceLayers = () => {
-    //    if(tractDaysSelect.is(':checked')) {
-    //         map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'visible');
-    //     } else if (tractDaysSelect.is(':checked') === false) {
-    //         map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'none');
-    //     }
-       
-    //    if (tractNightSelect.is(':checked')) {
-    //         map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'visible');
-    //     } else if (tractNightSelect.is(':checked') === false) {
-    //          map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
-    //     }
-    // }
+        
+    const toggleReferenceLayers = (shift) => {
+        if(tractDaysSelect.is(':checked') || shift === 'day') {
+            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'visible');
+            map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
+            map.setLayoutProperty('repo_locations_day', 'visibility', 'visible');
+            map.setLayoutProperty('repo_locations_night', 'visibility', 'none');
+        }
+        else if (tractNightSelect.is(':checked') || shift === 'night') {
+            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'none');
+            map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'visible');
+            map.setLayoutProperty('repo_locations_day', 'visibility', 'none');
+            map.setLayoutProperty('repo_locations_night', 'visibility', 'visible');
+        }
+    }
+
+    const checkTime = () => {
+        let currentHour = new Date().getHours()
+        if (currentHour >= 6 && currentHour <= 18) {
+            tractDaysSelect.prop('checked', true);
+            toggleReferenceLayers('day');
+        } else if (currentHour <= 6 && currentHour >= 18) {
+            tractNightSelect.prop('checked', true);
+            toggleReferenceLayers('ngiht');
+        }
+    }
 
     const updateFilters = () => {
         let filter = [
