@@ -87,6 +87,11 @@ async function init() {
             map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'visible');
             map.setLayoutProperty('repo_locations_day', 'visibility', 'none');
             map.setLayoutProperty('repo_locations_night', 'visibility', 'visible');
+        } else if (tractOffSelect.is(':checked') || shift === 'off') {
+            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'none');
+            map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
+            map.setLayoutProperty('repo_locations_day', 'visibility', 'none');
+            map.setLayoutProperty('repo_locations_night', 'visibility', 'none');
         }
     }
 
@@ -180,6 +185,7 @@ async function init() {
     $('input[name="age"]').on('change', updateFilters);
     tractDaysSelect.on('change', toggleReferenceLayers);
     tractNightSelect.on('change', toggleReferenceLayers);
+    tractOffSelect.on('change', toggleReferenceLayers);
 
     checkTime();
     updateFilters();
@@ -202,3 +208,4 @@ const vehicleSelect = $('#vehicle-select').select2({
 });
 const tractDaysSelect = $('#tracts-day');
 const tractNightSelect = $('#tracts-night');
+const tractOffSelect = $('#tracts-off');
