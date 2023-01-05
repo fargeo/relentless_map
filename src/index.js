@@ -75,34 +75,48 @@ async function init() {
     });
 
         
-    const toggleReferenceLayers = (shift) => {
-        if(tractDaysSelect.is(':checked') || shift === 'day') {
-            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'visible');
-            map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
+    const toggleHotspotLayers = (shift) => {
+        toggleValue = $('input[name="hotspots"]:checked').val();
+        if(toggleValue === 'day' || shift === 'day') {
             map.setLayoutProperty('repo_locations_day', 'visibility', 'visible');
             map.setLayoutProperty('repo_locations_night', 'visibility', 'none');
         }
-        else if (tractNightSelect.is(':checked') || shift === 'night') {
-            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'none');
-            map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'visible');
+        else if (toggleValue === 'night' || shift === 'night') {
             map.setLayoutProperty('repo_locations_day', 'visibility', 'none');
             map.setLayoutProperty('repo_locations_night', 'visibility', 'visible');
-        } else if (tractOffSelect.is(':checked') || shift === 'off') {
-            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'none');
-            map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
+        } else if (toggleValue === 'off' || shift === 'off') {
             map.setLayoutProperty('repo_locations_day', 'visibility', 'none');
             map.setLayoutProperty('repo_locations_night', 'visibility', 'none');
+        }
+    }
+
+    const toggleTractLayers = (shift) => {
+        toggleValue = $('input[name="tracts"]:checked').val();
+        if(toggleValue === 'day' || shift === 'day') {
+            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'visible');
+            map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
+        }
+        else if (toggleValue === 'night' || shift === 'night') {
+            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'none');
+            map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'visible');
+        } else if (toggleValue === 'off' || shift === 'off') {
+            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'none');
+            map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
         }
     }
 
     const checkTime = () => {
         let currentHour = new Date().getHours()
         if (currentHour >= 6 && currentHour <= 18) {
+            hotspotDaysSelect.prop('checked', true);
             tractDaysSelect.prop('checked', true);
-            toggleReferenceLayers('day');
+            toggleHotspotLayers('day');
+            toggleTractLayers('day');
         } else if (currentHour <= 6 && currentHour >= 18) {
+            hotspotNightSelect.prop('checked', true);
             tractNightSelect.prop('checked', true);
-            toggleReferenceLayers('ngiht');
+            toggleHotspotLayers('night');
+            toggleTractLayers('night');
         }
     }
 
@@ -183,9 +197,8 @@ async function init() {
     driverSelect.on('change', updateFilters);
     $('input[name="shift"]').on('change', updateFilters);
     $('input[name="age"]').on('change', updateFilters);
-    tractDaysSelect.on('change', toggleReferenceLayers);
-    tractNightSelect.on('change', toggleReferenceLayers);
-    tractOffSelect.on('change', toggleReferenceLayers);
+    $('input[name="hotspots"]').on('change', toggleHotspotLayers);
+    $('input[name="tracts"]').on('change', toggleTractLayers);
 
     checkTime();
     updateFilters();
@@ -206,6 +219,7 @@ const vehicleSelect = $('#vehicle-select').select2({
     width: "100%",
     data: vehicles
 });
+const hotspotDaysSelect = $('#hotspots-day');
+const hotspotNightSelect = $('#hotspots-night');
 const tractDaysSelect = $('#tracts-day');
 const tractNightSelect = $('#tracts-night');
-const tractOffSelect = $('#tracts-off');
