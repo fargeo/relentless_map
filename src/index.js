@@ -76,7 +76,7 @@ async function init() {
 
         
     const toggleHotspotLayers = (shift) => {
-        toggleValue = $('input[name="hotspots"]:checked').val();
+        let toggleValue = $('input[name="hotspots"]:checked').val();
         if(toggleValue === 'day' || shift === 'day') {
             map.setLayoutProperty('repo_locations_day', 'visibility', 'visible');
             map.setLayoutProperty('repo_locations_night', 'visibility', 'none');
@@ -91,7 +91,7 @@ async function init() {
     }
 
     const toggleTractLayers = (shift) => {
-        toggleValue = $('input[name="tracts"]:checked').val();
+        let toggleValue = $('input[name="tracts"]:checked').val();
         if(toggleValue === 'day' || shift === 'day') {
             map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'visible');
             map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
