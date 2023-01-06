@@ -108,15 +108,19 @@ async function init() {
     const checkTime = () => {
         let currentHour = new Date().getHours()
         if (currentHour >= 6 && currentHour <= 18) {
+            $('#shift-day').prop('checked', true);
             hotspotDaysSelect.prop('checked', true);
             tractDaysSelect.prop('checked', true);
             toggleHotspotLayers('day');
             toggleTractLayers('day');
+            shiftIndicator.text('Day Shift Map');
         } else if (currentHour <= 6 && currentHour >= 18) {
+            $('#shift-night').prop('checked', true);
             hotspotNightSelect.prop('checked', true);
             tractNightSelect.prop('checked', true);
             toggleHotspotLayers('night');
             toggleTractLayers('night');
+            shiftIndicator.text('Night Shift Map');
         }
     }
 
@@ -202,6 +206,11 @@ async function init() {
 
     checkTime();
     updateFilters();
+
+    if (window.location.pathname === '/') {
+        $('#age-14').prop('checked', true);
+        updateFilters();
+    }
 }
 
 mapboxgl.accessToken = settings.accessToken;
@@ -223,3 +232,4 @@ const hotspotDaysSelect = $('#hotspots-day');
 const hotspotNightSelect = $('#hotspots-night');
 const tractDaysSelect = $('#tracts-day');
 const tractNightSelect = $('#tracts-night');
+const shiftIndicator = $('#shift-indicator');
