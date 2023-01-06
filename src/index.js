@@ -206,11 +206,6 @@ async function init() {
 
     checkTime();
     updateFilters();
-
-    if (window.location.pathname === '/') {
-        $('#age-14').prop('checked', true);
-        updateFilters();
-    }
 }
 
 mapboxgl.accessToken = settings.accessToken;
