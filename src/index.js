@@ -159,37 +159,38 @@ async function init() {
     };
 
     const pathLayers = ['vehicle_paths']
-    map.on('click', pathLayers, (e) => {
-        new mapboxgl.Popup()
-            .setLngLat(e.lngLat)
-            .setHTML(`<table>
-                <tr>
-                    <th>Vehicle Name</th>
-                    <td>${e.features[0].properties.vehiclename}</td>
-                </tr>
-                <tr>
-                    <th>Driver Name</th>
-                    <td>${e.features[0].properties.drivername || "Driver Not Found"}</td>
-                </tr>
-                <tr>
-                    <th>Trip Date</th>
-                    <td>${new Date(e.features[0].properties.trip_date).toLocaleDateString()}</td>
-                </tr>
-                <tr>
-                    <th>Trip Age (days)</th>
-                    <td>${e.features[0].properties.trip_age}</td>
-                </tr>
-                <tr>
-                    <th>Shift</th>
-                    <td>${e.features[0].properties.shift}</td>
-                </tr>
-            </table>`)
-            .addTo(map);
-    });
+    if (!shiftIndicator.length) { map.on('click', pathLayers, (e) => {
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(`<table>
+                    <tr>
+                        <th>Vehicle Name</th>
+                        <td>${e.features[0].properties.vehiclename}</td>
+                    </tr>
+                    <tr>
+                        <th>Driver Name</th>
+                        <td>${e.features[0].properties.drivername || "Driver Not Found"}</td>
+                    </tr>
+                    <tr>
+                        <th>Trip Date</th>
+                        <td>${new Date(e.features[0].properties.trip_date).toLocaleDateString()}</td>
+                    </tr>
+                    <tr>
+                        <th>Trip Age (days)</th>
+                        <td>${e.features[0].properties.trip_age}</td>
+                    </tr>
+                    <tr>
+                        <th>Shift</th>
+                        <td>${e.features[0].properties.shift}</td>
+                    </tr>
+                </table>`)
+                .addTo(map);
+        });
 
-    map.on('mousemove', pathLayers, () => { map.getCanvas().style.cursor = 'pointer'; });
+        map.on('mousemove', pathLayers, () => { map.getCanvas().style.cursor = 'pointer'; });
 
-    map.on('mouseleave', pathLayers, () => { map.getCanvas().style.cursor = ''; });
+        map.on('mouseleave', pathLayers, () => { map.getCanvas().style.cursor = ''; });
+    }
 
     const datefilter = flatpickr('#rangeDate', {
         mode: 'range',
