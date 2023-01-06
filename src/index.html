@@ -7,7 +7,10 @@
     </head>
     <body>
         <main>
-            <div id="filter-form">
+            <div id="shift-indicator-container">
+                <h4 id="shift-indicator"></h4>
+            </div>
+            <div id="filter-form" style="display:none;">
                 <div id="filter-form-header">
                     <strong>Filter Routes</strong>
                     <a href="javascript:void(0)" class="expand-filters">
@@ -36,13 +39,13 @@
                     <div>
                         <div>Max route age (days)</div>
                         <div>
-                            <input type="radio" id="age-31" name="age" value="31" checked/>
+                            <input type="radio" id="age-31" name="age" value="31"/>
                             <label for="age-31">31</label>
 
                             <input type="radio" id="age-21" name="age" value="21"/>
                             <label for="age-21">21</label>
 
-                            <input type="radio" id="age-14" name="age" value="14"/>
+                            <input type="radio" id="age-14" name="age" value="14" checked/>
                             <label for="age-14">14</label>
 
                             <input type="radio" id="age-7" name="age" value="7"/>
@@ -69,13 +72,29 @@
                         </div>
                     </div>
                     <div>
-                        <div>Repo's by Shift</div>
+                        <div>Repo Hotspots</div>
+                        <div>
+                            <input type="radio" id="hotspots-day" name="hotspots" value="day" />
+                            <label for="hotspots-day">Day</label>
+
+                            <input type="radio" id="hotspots-night" name="hotspots" value="night" />
+                            <label for="hotspots-night">Night</label>
+
+                            <input type="radio" id="hotspots-off" name="hotspots" value="off" />
+                            <label for="hotspots-off">Off</label>
+                        </div>
+                    </div>
+                    <div>
+                        <div>Repo's by Area</div>
                         <div>
                             <input type="radio" id="tracts-day" name="tracts" value="day" />
                             <label for="tracts-day">Day</label>
 
                             <input type="radio" id="tracts-night" name="tracts" value="night" />
                             <label for="tracts-night">Night</label>
+
+                            <input type="radio" id="tracts-off" name="tracts" value="off" />
+                            <label for="tracts-off">Off</label>
                         </div>
                     </div>
                 </div>

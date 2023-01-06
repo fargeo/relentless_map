@@ -75,29 +75,52 @@ async function init() {
     });
 
         
-    const toggleReferenceLayers = (shift) => {
-        if(tractDaysSelect.is(':checked') || shift === 'day') {
-            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'visible');
-            map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
+    const toggleHotspotLayers = (shift) => {
+        let toggleValue = $('input[name="hotspots"]:checked').val();
+        if(toggleValue === 'day' || shift === 'day') {
             map.setLayoutProperty('repo_locations_day', 'visibility', 'visible');
             map.setLayoutProperty('repo_locations_night', 'visibility', 'none');
         }
-        else if (tractNightSelect.is(':checked') || shift === 'night') {
-            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'none');
-            map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'visible');
+        else if (toggleValue === 'night' || shift === 'night') {
             map.setLayoutProperty('repo_locations_day', 'visibility', 'none');
             map.setLayoutProperty('repo_locations_night', 'visibility', 'visible');
+        } else if (toggleValue === 'off' || shift === 'off') {
+            map.setLayoutProperty('repo_locations_day', 'visibility', 'none');
+            map.setLayoutProperty('repo_locations_night', 'visibility', 'none');
+        }
+    }
+
+    const toggleTractLayers = (shift) => {
+        let toggleValue = $('input[name="tracts"]:checked').val();
+        if(toggleValue === 'day' || shift === 'day') {
+            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'visible');
+            map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
+        }
+        else if (toggleValue === 'night' || shift === 'night') {
+            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'none');
+            map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'visible');
+        } else if (toggleValue === 'off' || shift === 'off') {
+            map.setLayoutProperty('serviceArea_ranked_day', 'visibility', 'none');
+            map.setLayoutProperty('serviceArea_ranked_night', 'visibility', 'none');
         }
     }
 
     const checkTime = () => {
         let currentHour = new Date().getHours()
         if (currentHour >= 6 && currentHour <= 18) {
+            $('#shift-day').prop('checked', true);
+            hotspotDaysSelect.prop('checked', true);
             tractDaysSelect.prop('checked', true);
-            toggleReferenceLayers('day');
+            toggleHotspotLayers('day');
+            toggleTractLayers('day');
+            shiftIndicator.text('Day Shift Map');
         } else if (currentHour <= 6 && currentHour >= 18) {
+            $('#shift-night').prop('checked', true);
+            hotspotNightSelect.prop('checked', true);
             tractNightSelect.prop('checked', true);
-            toggleReferenceLayers('ngiht');
+            toggleHotspotLayers('night');
+            toggleTractLayers('night');
+            shiftIndicator.text('Night Shift Map');
         }
     }
 
@@ -136,37 +159,38 @@ async function init() {
     };
 
     const pathLayers = ['vehicle_paths']
-    map.on('click', pathLayers, (e) => {
-        new mapboxgl.Popup()
-            .setLngLat(e.lngLat)
-            .setHTML(`<table>
-                <tr>
-                    <th>Vehicle Name</th>
-                    <td>${e.features[0].properties.vehiclename}</td>
-                </tr>
-                <tr>
-                    <th>Driver Name</th>
-                    <td>${e.features[0].properties.drivername || "Driver Not Found"}</td>
-                </tr>
-                <tr>
-                    <th>Trip Date</th>
-                    <td>${new Date(e.features[0].properties.trip_date).toLocaleDateString()}</td>
-                </tr>
-                <tr>
-                    <th>Trip Age (days)</th>
-                    <td>${e.features[0].properties.trip_age}</td>
-                </tr>
-                <tr>
-                    <th>Shift</th>
-                    <td>${e.features[0].properties.shift}</td>
-                </tr>
-            </table>`)
-            .addTo(map);
-    });
+    if (!shiftIndicator.length) { map.on('click', pathLayers, (e) => {
+            new mapboxgl.Popup()
+                .setLngLat(e.lngLat)
+                .setHTML(`<table>
+                    <tr>
+                        <th>Vehicle Name</th>
+                        <td>${e.features[0].properties.vehiclename}</td>
+                    </tr>
+                    <tr>
+                        <th>Driver Name</th>
+                        <td>${e.features[0].properties.drivername || "Driver Not Found"}</td>
+                    </tr>
+                    <tr>
+                        <th>Trip Date</th>
+                        <td>${new Date(e.features[0].properties.trip_date).toLocaleDateString()}</td>
+                    </tr>
+                    <tr>
+                        <th>Trip Age (days)</th>
+                        <td>${e.features[0].properties.trip_age}</td>
+                    </tr>
+                    <tr>
+                        <th>Shift</th>
+                        <td>${e.features[0].properties.shift}</td>
+                    </tr>
+                </table>`)
+                .addTo(map);
+        });
 
-    map.on('mousemove', pathLayers, () => { map.getCanvas().style.cursor = 'pointer'; });
+        map.on('mousemove', pathLayers, () => { map.getCanvas().style.cursor = 'pointer'; });
 
-    map.on('mouseleave', pathLayers, () => { map.getCanvas().style.cursor = ''; });
+        map.on('mouseleave', pathLayers, () => { map.getCanvas().style.cursor = ''; });
+    }
 
     const datefilter = flatpickr('#rangeDate', {
         mode: 'range',
@@ -178,8 +202,8 @@ async function init() {
     driverSelect.on('change', updateFilters);
     $('input[name="shift"]').on('change', updateFilters);
     $('input[name="age"]').on('change', updateFilters);
-    tractDaysSelect.on('change', toggleReferenceLayers);
-    tractNightSelect.on('change', toggleReferenceLayers);
+    $('input[name="hotspots"]').on('change', toggleHotspotLayers);
+    $('input[name="tracts"]').on('change', toggleTractLayers);
 
     checkTime();
     updateFilters();
@@ -200,5 +224,8 @@ const vehicleSelect = $('#vehicle-select').select2({
     width: "100%",
     data: vehicles
 });
+const hotspotDaysSelect = $('#hotspots-day');
+const hotspotNightSelect = $('#hotspots-night');
 const tractDaysSelect = $('#tracts-day');
 const tractNightSelect = $('#tracts-night');
+const shiftIndicator = $('#shift-indicator');

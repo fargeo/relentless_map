@@ -16,7 +16,7 @@ main {
     height: 100%;
 }
 
-#filter-form {
+#filter-form, #shift-indicator {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -26,6 +26,10 @@ main {
     border-radius: 2px;
     width: 400px;
     overflow: hidden;
+}
+
+#shift-indicator {
+    width: 200px;
 }
 
 #filter-form-header {
@@ -100,6 +104,12 @@ tr * {
         bottom: 40px;
         left: 10px;
         right: 10px;
+        top: auto;
+        width: auto;
+    }
+
+    #shift-indicator {
+        bottom: 15px;
         top: auto;
         width: auto;
     }
