@@ -107,14 +107,14 @@ async function init() {
 
     const checkTime = () => {
         let currentHour = new Date().getHours()
-        if (currentHour >= 6 && currentHour <= 18) {
+        if (currentHour >= 6 && currentHour < 18) {
             $('#shift-day').prop('checked', true);
             hotspotDaysSelect.prop('checked', true);
             tractDaysSelect.prop('checked', true);
             toggleHotspotLayers('day');
             toggleTractLayers('day');
             shiftIndicator.text('Day Shift Map');
-        } else if (currentHour <= 6 && currentHour >= 18) {
+        } else if (currentHour < 6 || currentHour >= 18) {
             $('#shift-night').prop('checked', true);
             hotspotNightSelect.prop('checked', true);
             tractNightSelect.prop('checked', true);
